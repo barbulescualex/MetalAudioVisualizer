@@ -76,27 +76,24 @@ class ViewController: NSViewController {
             print(error.localizedDescription)
         }
         
+        print(Thread.current)
+        
         //tap it to get the buffer data at playtime
         engine.mainMixerNode.installTap(onBus: 0, bufferSize: 1024, format: nil) { (buffer, time) in
-            
+            self.processAudioData(buffer: buffer)
         }
         
         //start playing the music!
         player.play()
     }
-    //
+    
+
     func processAudioData(buffer: AVAudioPCMBuffer){
         guard let channelData = buffer.floatChannelData?[0] else {return}
-        print(Thread.current)
-        //print(buffer.int16ChannelData)
-        //print(SignalProcessing.rms(data: channelData))
+        let frames = buffer.frameLength
+        
+        let rmsValue = SignalProcessing.rms(data: channelData, frameLength: UInt(frames))
+    
     }
 }
 
-//class SignalProcessing {
-//    static func rms(data: UnsafeMutablePointer<Float>) -> Float {
-//        var val : Float = 0
-//        vDSP_measqv(data, 1, &val, 1024)
-//        return val
-//    }
-//}

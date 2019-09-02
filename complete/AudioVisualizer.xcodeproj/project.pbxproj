@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FA1067DC225E4D2000D9A17D /* CircleShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = FA1067DB225E4D2000D9A17D /* CircleShader.metal */; };
 		FA3DB132230F385500925E52 /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA3DB131230F385500925E52 /* music.mp3 */; };
+		FA8AD70F231DAC5B008BBBC7 /* SignalProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD70E231DAC5B008BBBC7 /* SignalProcessing.swift */; };
 		FAD6D92122593AAF000BD72E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD6D92022593AAF000BD72E /* AppDelegate.swift */; };
 		FAD6D92322593AAF000BD72E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD6D92222593AAF000BD72E /* ViewController.swift */; };
 		FAD6D92522593AB0000BD72E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD6D92422593AB0000BD72E /* Assets.xcassets */; };
@@ -19,13 +20,13 @@
 /* Begin PBXFileReference section */
 		FA1067DB225E4D2000D9A17D /* CircleShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = CircleShader.metal; sourceTree = "<group>"; };
 		FA3DB131230F385500925E52 /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
+		FA8AD70E231DAC5B008BBBC7 /* SignalProcessing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalProcessing.swift; sourceTree = "<group>"; };
 		FAD6D91D22593AAF000BD72E /* AudioVisualizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioVisualizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD6D92022593AAF000BD72E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD6D92222593AAF000BD72E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FAD6D92422593AB0000BD72E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAD6D92722593AB0000BD72E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FAD6D92922593AB0000BD72E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FAD6D92A22593AB0000BD72E /* MetalCircle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MetalCircle.entitlements; sourceTree = "<group>"; };
 		FAD6D93222593BBE000BD72E /* AudioVisualizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioVisualizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,13 +63,13 @@
 				FAD6D92022593AAF000BD72E /* AppDelegate.swift */,
 				FAD6D92222593AAF000BD72E /* ViewController.swift */,
 				FAD6D93222593BBE000BD72E /* AudioVisualizer.swift */,
+				FA8AD70E231DAC5B008BBBC7 /* SignalProcessing.swift */,
 				FA1067DB225E4D2000D9A17D /* CircleShader.metal */,
 				FA3DB131230F385500925E52 /* music.mp3 */,
 				FAD6D91E22593AAF000BD72E /* Products */,
 				FAD6D92422593AB0000BD72E /* Assets.xcassets */,
 				FAD6D92622593AB0000BD72E /* Main.storyboard */,
 				FAD6D92922593AB0000BD72E /* Info.plist */,
-				FAD6D92A22593AB0000BD72E /* MetalCircle.entitlements */,
 			);
 			path = AudioVisualizer;
 			sourceTree = "<group>";
@@ -146,6 +147,7 @@
 			files = (
 				FA1067DC225E4D2000D9A17D /* CircleShader.metal in Sources */,
 				FAD6D93322593BBE000BD72E /* AudioVisualizer.swift in Sources */,
+				FA8AD70F231DAC5B008BBBC7 /* SignalProcessing.swift in Sources */,
 				FAD6D92322593AAF000BD72E /* ViewController.swift in Sources */,
 				FAD6D92122593AAF000BD72E /* AppDelegate.swift in Sources */,
 			);
@@ -284,11 +286,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = MetalCircle/MetalCircle.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = YB435W5MT8;
-				INFOPLIST_FILE = MetalCircle/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/AudioVisualizer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -303,11 +304,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = MetalCircle/MetalCircle.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = YB435W5MT8;
-				INFOPLIST_FILE = MetalCircle/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/AudioVisualizer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
