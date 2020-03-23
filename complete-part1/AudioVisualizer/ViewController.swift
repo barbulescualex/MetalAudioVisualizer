@@ -8,6 +8,7 @@
 
 import Cocoa
 import AVFoundation
+import Accelerate
 
 class ViewController: NSViewController {
     var engine : AVAudioEngine!
@@ -76,24 +77,33 @@ class ViewController: NSViewController {
             print(error.localizedDescription)
         }
         
-        print(Thread.current)
-        
         //tap it to get the buffer data at playtime
+        
         engine.mainMixerNode.installTap(onBus: 0, bufferSize: 1024, format: nil) { (buffer, time) in
             self.processAudioData(buffer: buffer)
         }
         
         //start playing the music!
         player.play()
+        
     }
     
+    var prevRMSValue : Float = 0.3
+    
+    //fft setup object for 1024 values going forward (time domain -> frequency domain)
+    let fftSetup = vDSP_DFT_zop_CreateSetup(nil, 1024, vDSP_DFT_Direction.FORWARD)
 
     func processAudioData(buffer: AVAudioPCMBuffer){
         guard let channelData = buffer.floatChannelData?[0] else {return}
         let frames = buffer.frameLength
         
+        //rms
         let rmsValue = SignalProcessing.rms(data: channelData, frameLength: UInt(frames))
-    
+        let interpolatedResults = SignalProcessing.interpolate(point1: prevRMSValue, point2: rmsValue, num: 7)
+        prevRMSValue = rmsValue
+        
+        //fft
+        let normalizedMagnitudes =  SignalProcessing.fft(data: channelData, setup: fftSetup!)
     }
 }
 

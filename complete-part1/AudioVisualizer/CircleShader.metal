@@ -30,3 +30,4 @@ vertex VertexOut vertexShader(const constant vector_float2 *vertexArray [[buffer
 fragment vector_float4 fragmentShader(VertexOut interpolated [[stage_in]]){
     return interpolated.color;
 }
+
