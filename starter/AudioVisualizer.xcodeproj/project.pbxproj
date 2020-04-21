@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FA1067DC225E4D2000D9A17D /* CircleShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = FA1067DB225E4D2000D9A17D /* CircleShader.metal */; };
 		FA3DB132230F385500925E52 /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA3DB131230F385500925E52 /* music.mp3 */; };
+		FA8F3386242D98BC00D86500 /* SignalProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F3385242D98BC00D86500 /* SignalProcessing.swift */; };
 		FAD6D92122593AAF000BD72E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD6D92022593AAF000BD72E /* AppDelegate.swift */; };
 		FAD6D92322593AAF000BD72E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD6D92222593AAF000BD72E /* ViewController.swift */; };
 		FAD6D92522593AB0000BD72E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD6D92422593AB0000BD72E /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		FA1067DB225E4D2000D9A17D /* CircleShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = CircleShader.metal; sourceTree = "<group>"; };
 		FA3DB131230F385500925E52 /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
+		FA8F3385242D98BC00D86500 /* SignalProcessing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalProcessing.swift; sourceTree = "<group>"; };
 		FAD6D91D22593AAF000BD72E /* AudioVisualizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioVisualizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD6D92022593AAF000BD72E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD6D92222593AAF000BD72E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 			children = (
 				FAD6D92022593AAF000BD72E /* AppDelegate.swift */,
 				FAD6D92222593AAF000BD72E /* ViewController.swift */,
+				FA8F3385242D98BC00D86500 /* SignalProcessing.swift */,
 				FAD6D93222593BBE000BD72E /* AudioVisualizer.swift */,
 				FA1067DB225E4D2000D9A17D /* CircleShader.metal */,
 				FA3DB131230F385500925E52 /* music.mp3 */,
@@ -146,6 +149,7 @@
 			files = (
 				FA1067DC225E4D2000D9A17D /* CircleShader.metal in Sources */,
 				FAD6D93322593BBE000BD72E /* AudioVisualizer.swift in Sources */,
+				FA8F3386242D98BC00D86500 /* SignalProcessing.swift in Sources */,
 				FAD6D92322593AAF000BD72E /* ViewController.swift in Sources */,
 				FAD6D92122593AAF000BD72E /* AppDelegate.swift in Sources */,
 			);

@@ -34,7 +34,7 @@ class SignalProcessing {
         return adjustedVal
     }
     
-    static func fft(data: UnsafeMutablePointer<Float>, setup: OpaquePointer) -> [Float]{
+    static func fft(data: UnsafeMutablePointer<Float>, setup: OpaquePointer) -> [Float] {
         //output setup
         var realIn = [Float](repeating: 0, count: 1024)
         var imagIn = [Float](repeating: 0, count: 1024)
@@ -68,38 +68,20 @@ class SignalProcessing {
         return normalizedMagnitudes
     }
     
-    static func interpolate(point1: Float, point2: Float, num: Int) -> [Float] {
-        var output = [Float](repeating: 0, count: num)
-
-        let middle = (point2 - point1).magnitude/2 + point1
+    static func interpolate(current: Float, previous: Float) -> [Float]{
+        var vals = [Float](repeating: 0, count: 11)
+        vals[10] = current
+        vals[5] = (current + previous)/2
+        vals[2] = (vals[5] + previous)/2
+        vals[1] = (vals[2] + previous)/2
+        vals[8] = (vals[5] + current)/2
+        vals[9] = (vals[10] + current)/2
+        vals[7] = (vals[5] + vals[9])/2
+        vals[6] = (vals[5] + vals[7])/2
+        vals[3] = (vals[1] + vals[5])/2
+        vals[4] = (vals[3] + vals[5])/2
+        vals[0] = (previous + vals[1])/2
         
-        var sides : Int = (num - 1)/2
-        self.interpolateHelperL(point1: point1, point2: middle, num: &sides, output: &output)
-        
-        sides = (num - 1)/2
-        output[sides] = middle
-        self.interpolateHelperR(point1: middle, point2: point2, num: &sides, output: &output)
-        
-        return output
-    }
-    
-    private static func interpolateHelperL(point1: Float, point2: Float, num: inout Int, output: inout [Float]){
-        if(num == 0){ return }
-        
-        let middle = (point2 - point1).magnitude/2 + point1
-        output[num-1] = middle
-        num = num - 1
-        
-        interpolateHelperL(point1: point1, point2: middle, num: &num, output: &output)
-    }
-    
-    private static func interpolateHelperR(point1: Float, point2: Float, num: inout Int, output: inout [Float]){
-        if(num == 0) { return }
-        
-        let middle = (point2 - point1).magnitude/2 + point1
-        output[output.count - num] = middle
-        num = num - 1
-        
-        interpolateHelperR(point1: middle, point2: point2, num: &num, output: &output)
+        return vals
     }
 }

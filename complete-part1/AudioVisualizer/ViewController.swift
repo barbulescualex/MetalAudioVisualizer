@@ -99,11 +99,11 @@ class ViewController: NSViewController {
         
         //rms
         let rmsValue = SignalProcessing.rms(data: channelData, frameLength: UInt(frames))
-        let interpolatedResults = SignalProcessing.interpolate(point1: prevRMSValue, point2: rmsValue, num: 7)
+        let interpolatedResults = SignalProcessing.interpolate(current: rmsValue, previous: prevRMSValue)
         prevRMSValue = rmsValue
         
         //fft
-        let normalizedMagnitudes =  SignalProcessing.fft(data: channelData, setup: fftSetup!)
+        let fftMagnitudes =  SignalProcessing.fft(data: channelData, setup: fftSetup!)
     }
 }
 
