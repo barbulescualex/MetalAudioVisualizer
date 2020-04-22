@@ -21,6 +21,23 @@ class AudioVisualizer: NSView {
     //MARK: VERTEX VARS
     private var circleVertices = [simd_float2]()
     private var vertexBuffer : MTLBuffer!
+    
+    private var loudnessUniformBuffer : MTLBuffer!
+    public var loudnessMagnitude : Float = 0.3 {
+        didSet{
+            loudnessUniformBuffer = metalDevice.makeBuffer(bytes: &loudnessMagnitude, length: MemoryLayout<Float>.stride, options: [])!
+            metalView.draw()
+        }
+    }
+    
+    private var freqeuencyBuffer : MTLBuffer!
+    public var frequencyVertices : [Float] = [Float](repeating: 0, count: 361) {
+        didSet{
+            let sliced = Array(frequencyVertices[0..<361])
+            freqeuencyBuffer = metalDevice.makeBuffer(bytes: sliced, length: sliced.count * MemoryLayout<Float>.stride, options: [])!
+            metalView.draw()
+        }
+    }
 
     //MARK: INIT
     public required init() {
@@ -53,7 +70,7 @@ class AudioVisualizer: NSView {
         
         //updates
         metalView.isPaused = true
-        metalView.enableSetNeedsDisplay = true
+        metalView.enableSetNeedsDisplay = false
         
         //connect to the gpu
         metalDevice = MTLCreateSystemDefaultDevice()!
@@ -68,8 +85,14 @@ class AudioVisualizer: NSView {
         //turn the vertex points into buffer data
         vertexBuffer = metalDevice.makeBuffer(bytes: circleVertices, length: circleVertices.count * MemoryLayout<simd_float2>.stride, options: [])!
         
+        //initialize the loudnessUniform buffer data
+        loudnessUniformBuffer = metalDevice.makeBuffer(bytes: &loudnessMagnitude, length: MemoryLayout<Float>.stride, options: [])!
+        
+        //initialize the freqeuencyBuffer data
+        freqeuencyBuffer = metalDevice.makeBuffer(bytes: frequencyVertices, length: frequencyVertices.count * MemoryLayout<Float>.stride, options: [])!
+        
         //draw
-        metalView.needsDisplay = true
+        metalView.draw()
     }
     
     fileprivate func createPipelineState(){
@@ -96,8 +119,8 @@ class AudioVisualizer: NSView {
         
         let origin = simd_float2(0, 0)
         
-        for i in 0..<720 {
-            let position : simd_float2 = [cos(rads(forDegree: Float(i)))*1,sin(rads(forDegree: Float(i)))*1]
+        for i in 0...720 {
+            let position : simd_float2 = [cos(rads(forDegree: Float(Float(i)/2.0))),sin(rads(forDegree: Float(Float(i)/2.0)))]
             circleVertices.append(position)
             if (i+1)%2 == 0 {
                 circleVertices.append(origin)
@@ -118,7 +141,7 @@ extension AudioVisualizer : MTKViewDelegate {
         //Creating the interface for the pipeline
         guard let renderDescriptor = view.currentRenderPassDescriptor else {return}
         //Setting a "background color"
-        renderDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0, 0, 1, 1)
+        renderDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0, 0, 0, 1)
         
         //Creating the command encoder, or the "inside" of the pipeline
         guard let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderDescriptor) else {return}
@@ -128,7 +151,10 @@ extension AudioVisualizer : MTKViewDelegate {
         
         /*********** Encoding the commands **************/
         renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-        renderEncoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 1080)
+        renderEncoder.setVertexBuffer(loudnessUniformBuffer, offset: 0, index: 1)
+        renderEncoder.setVertexBuffer(freqeuencyBuffer, offset: 0, index: 2)
+        renderEncoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 1081)
+        renderEncoder.drawPrimitives(type: .lineStrip, vertexStart: 1081, vertexCount: 1081)
         
         renderEncoder.endEncoding()
         commandBuffer.present(view.currentDrawable!)

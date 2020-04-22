@@ -10,10 +10,11 @@ import Cocoa
 import AVFoundation
 
 class ViewController: NSViewController {
-
+    var audioVisualizer : AudioVisualizer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let audioVisualizer = AudioVisualizer()
+        audioVisualizer = AudioVisualizer()
         view.addSubview(audioVisualizer)
         
         //constraining to window

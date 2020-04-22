@@ -12,10 +12,11 @@ import Accelerate
 
 class ViewController: NSViewController {
     var engine : AVAudioEngine!
+    var audioVisualizer : AudioVisualizer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let audioVisualizer = AudioVisualizer()
+        audioVisualizer = AudioVisualizer()
         view.addSubview(audioVisualizer)
         
         //constraining to window
@@ -102,8 +103,14 @@ class ViewController: NSViewController {
         let interpolatedResults = SignalProcessing.interpolate(current: rmsValue, previous: prevRMSValue)
         prevRMSValue = rmsValue
         
+        //pass values to the audiovisualizer for the rendering
+        for rms in interpolatedResults {
+            audioVisualizer.loudnessMagnitude = rms
+        }
+        
         //fft
         let fftMagnitudes =  SignalProcessing.fft(data: channelData, setup: fftSetup!)
+        audioVisualizer.frequencyVertices = fftMagnitudes
     }
 }
 

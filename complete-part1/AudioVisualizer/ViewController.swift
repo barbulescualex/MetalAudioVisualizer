@@ -12,10 +12,11 @@ import Accelerate
 
 class ViewController: NSViewController {
     var engine : AVAudioEngine!
+    var audioVisualizer : AudioVisualizer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let audioVisualizer = AudioVisualizer()
+        audioVisualizer = AudioVisualizer()
         view.addSubview(audioVisualizer)
         
         //constraining to window
