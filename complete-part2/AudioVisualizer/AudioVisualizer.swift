@@ -33,7 +33,7 @@ class AudioVisualizer: NSView {
     private var freqeuencyBuffer : MTLBuffer!
     public var frequencyVertices : [Float] = [Float](repeating: 0, count: 361) {
         didSet{
-            let sliced = Array(frequencyVertices[0..<361])
+            let sliced = Array(frequencyVertices[76..<438])
             freqeuencyBuffer = metalDevice.makeBuffer(bytes: sliced, length: sliced.count * MemoryLayout<Float>.stride, options: [])!
             metalView.draw()
         }
