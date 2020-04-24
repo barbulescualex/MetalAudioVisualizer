@@ -128,7 +128,7 @@ extension AudioVisualizer : MTKViewDelegate {
         
         /*********** Encoding the commands **************/
         renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-        renderEncoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 1080)
+        renderEncoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 1081)
         
         renderEncoder.endEncoding()
         commandBuffer.present(view.currentDrawable!)
